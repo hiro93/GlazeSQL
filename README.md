@@ -32,4 +32,5 @@ mysql -u127.0.0.1 -p3306 -uroot -p
 - 连接完成后，如果没有后续的动作，这个连接就处于空闲状态，你可以在 `show processlist` 命令中看到它。
 - 客户端如果太长时间没动静，连接器就会自动将它断开。这个时间是由参数 `wait_timeout`控制的，默认值是 8 小时。
 
-## [协议分析与实现](./wiki/MySQL Protocol.md)
+[协议分析与实现](./wiki/MySQL Protocol.md)
+

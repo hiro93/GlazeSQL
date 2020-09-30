@@ -1,6 +1,7 @@
 package net.sk32.glaze.engine.network.protocol;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * MySQL 握手包
@@ -12,17 +13,17 @@ public class HandshakeV10 {
     /**
      * protocol version, Always 10
      */
-    public int protocolVersion;
+    private final int protocolVersion = 0x0A;
 
     /**
      * server version, human readable status information
      */
-    public String serverVersion;
+    private final String serverVersion = "8.0.16";
 
     /**
      * thread id, a.k.a. connection id
      */
-    public int threadId;
+    private int threadId;
 
     /**
      * auth-plugin-data
@@ -30,10 +31,21 @@ public class HandshakeV10 {
     public byte[] authPluginData;
 
     /**
+     * auth_plugin_name
+     */
+    public final String authPluginName = "mysql_native_password";
+
+    /**
      * Capabilities Flags
      * @see <a href="https://dev.mysql.com/doc/dev/mysql-server/latest/group__group__cs__capabilities__flags.html">Capabilities Flags</a>
      */
-    public int capabilityFlags;
+    public long capabilityFlags() {
+        long flag = 0;
+        for (CapabilityFlags capability : capabilities) {
+            flag |= 1L << capability.ordinal();
+        }
+        return flag;
+    };
 
     /**
      * default server a_protocol_character_set, only the lower 8-bits
@@ -46,9 +58,21 @@ public class HandshakeV10 {
      */
     public int statusFlags;
 
-    private Set<CapabilityFlags> capabilities;
+    private final Set<CapabilityFlags> capabilities = new TreeSet<>();
 
     public Set<CapabilityFlags> getCapabilities() {
         return capabilities;
+    }
+
+    public int getProtocolVersion() {
+        return protocolVersion;
+    }
+
+    public String getServerVersion() {
+        return serverVersion;
+    }
+
+    public int getThreadId() {
+        return threadId;
     }
 }

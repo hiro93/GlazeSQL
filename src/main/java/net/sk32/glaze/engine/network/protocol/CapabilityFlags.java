@@ -1,5 +1,8 @@
 package net.sk32.glaze.engine.network.protocol;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Values for the capabilities flag bitmask used by the MySQL protocol.
  * Currently need to fit into 32 bits.
