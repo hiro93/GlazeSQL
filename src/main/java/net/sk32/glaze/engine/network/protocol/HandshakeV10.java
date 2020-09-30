@@ -1,5 +1,7 @@
 package net.sk32.glaze.engine.network.protocol;
 
+import java.util.Set;
+
 /**
  * MySQL 握手包
  *
@@ -43,4 +45,10 @@ public class HandshakeV10 {
      * @see <a href="https://dev.mysql.com/doc/dev/mysql-server/latest/mysql__com_8h.html">SERVER_STATUS_flags_enum</a>
      */
     public int statusFlags;
+
+    private Set<CapabilityFlags> capabilities;
+
+    public Set<CapabilityFlags> getCapabilities() {
+        return capabilities;
+    }
 }
